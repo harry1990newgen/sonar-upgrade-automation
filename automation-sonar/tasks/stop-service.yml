@@ -1,8 +1,4 @@
 ---
-- name: Check and stop PostgreSQL and SonarQube services
-  hosts: 127.0.0.1
-  become: yes
-  tasks:
 
     - name: Gather service facts
       service_facts:

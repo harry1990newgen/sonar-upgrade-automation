@@ -1,2 +1,29 @@
 ---
-# tasks file for automation-sonar
+
+
+- name: Include stop service tasks
+  import_tasks: stop-service.yml
+
+- name: Include tar backup tasks
+  import_tasks: tarback.yml
+
+- name: Include copy and extract zip tasks
+  import_tasks: extract.yml
+
+- name: Include rename folder tasks
+  import_tasks: rename2.yml
+
+- name: Include system-service edit with latest version tasks
+  import_tasks: system-service2.yml
+
+- name: Include append jdbc & creds in sonar.properties tasks
+  import_tasks: append-sonar.yml
+
+- name: Include permission fix tasks
+  import_tasks: permission.yml
+
+- name: Include start service tasks
+  import_tasks: start-service.yml
+
+
+

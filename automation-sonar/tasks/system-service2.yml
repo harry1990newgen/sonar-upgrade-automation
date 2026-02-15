@@ -1,11 +1,4 @@
 ---
-- name: Update SonarQube service version in systemd file
-  hosts: 127.0.0.1
-  become: yes
-    #  vars:
-    #old_version: "2025.6.0"
-    #new_version: "2025.6.1"
-  tasks:
 
     - name: Replace old SonarQube version with new version
       replace:

@@ -1,8 +1,4 @@
 ---
-- name: Append JDBC settings from old to new SonarQube
-  hosts: 127.0.0.1
-  become: yes
-  tasks:
 
     - name: Read JDBC settings from old sonar.properties
       slurp:

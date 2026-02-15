@@ -1,8 +1,4 @@
 ---
-- name: Fix SonarQube directory permissions
-  hosts: 127.0.0.1
-  become: yes
-  tasks:
 
     - name: Set ownership of SonarQube directory
       file:

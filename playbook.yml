@@ -1,0 +1,8 @@
+---
+- name: Run automation sonar role
+  hosts: 127.0.0.1
+  become: yes
+
+  roles:
+    - automation-sonar
+

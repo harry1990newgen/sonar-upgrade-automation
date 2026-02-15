@@ -1,11 +1,4 @@
 ---
-- name: Backup SonarQube folder as tarball
-  hosts: 127.0.0.1
-  become: yes
-  vars:
-    date: "{{ lookup('pipe', 'date +%Y%m%d') }}"  # Format: YYYYMMDD
-
-  tasks:
     - name: Create destination directory
       ansible.builtin.file:
         path: /tmp/sonarqube-backup-{{ date }}

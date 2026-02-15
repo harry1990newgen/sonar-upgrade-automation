@@ -1,8 +1,4 @@
 ---
-- name: Download & extract latest SonarQube
-  hosts: 127.0.0.1
-  become: yes
-  tasks:
 
     - name: Find extracted SonarQube directory
       find:
