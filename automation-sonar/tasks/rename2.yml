@@ -1,0 +1,17 @@
+---
+- name: Download & extract latest SonarQube
+  hosts: 127.0.0.1
+  become: yes
+  tasks:
+
+    - name: Find extracted SonarQube directory
+      find:
+        paths: /opt/sonarqube
+        patterns: "sonarqube-{{ new_version }}.*"
+        file_type: directory
+      register: sq_dir
+
+    - name: Rename latest SonarQube directory
+      command: mv {{ sq_dir.files[0].path }} /opt/sonarqube/sonarqube-{{ new_version }}
+      when: sq_dir.matched > 0
+

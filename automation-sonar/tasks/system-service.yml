@@ -1,0 +1,15 @@
+---
+- name: Update SonarQube service version in systemd file
+  hosts: 127.0.0.1
+  become: yes
+  tasks:
+
+    - name: Replace old SonarQube version with new version
+      replace:
+        path: /etc/systemd/system/sonarqube.service
+        regexp: 'sonarqube-{{ old_version }}'
+        replace: 'sonarqube-{{ new_vsersion }}'
+        backup: yes
+
+    - name: Reload systemd daemon to apply changes
+      command: systemctl daemon-reload

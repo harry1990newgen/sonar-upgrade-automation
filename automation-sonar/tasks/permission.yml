@@ -1,0 +1,19 @@
+---
+- name: Fix SonarQube directory permissions
+  hosts: 127.0.0.1
+  become: yes
+  tasks:
+
+    - name: Set ownership of SonarQube directory
+      file:
+        path: /opt/sonarqube/sonarqube-2025.6.1
+        owner: sonarqube
+        group: sonarqube
+        recurse: yes
+
+    - name: Set permissions of SonarQube directory
+      file:
+        path: /opt/sonarqube/sonarqube-2025.6.1
+        mode: '0755'
+        recurse: yes
+

@@ -1,0 +1,27 @@
+---
+- name: Download & extract latest SonarQube
+  hosts: 127.0.0.1
+  become: yes
+  tasks:
+
+    - name: Copy latest SonarQube zip from /tmp to /opt
+      copy:
+        src: "{{ item }}"
+        dest: /opt/sonarqube/
+        owner: ansible
+        group: ansible
+        mode: '0777'
+      with_fileglob:
+        - "/tmp/sonarqube-developer*"
+
+    - name: Extract SonarQube zip(s) inside /opt/sonarqube
+      unarchive:
+        src: "{{ item }}"
+        dest: /opt/sonarqube/
+        remote_src: yes
+        owner: ansible
+        group: ansible
+      with_fileglob:
+        - "/opt/sonarqube/sonarqube-developer*.zip"
+
+

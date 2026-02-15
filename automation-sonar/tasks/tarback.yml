@@ -1,0 +1,28 @@
+---
+- name: Backup SonarQube folder as tarball
+  hosts: 127.0.0.1
+  become: yes
+  vars:
+    date: "{{ lookup('pipe', 'date +%Y%m%d') }}"  # Format: YYYYMMDD
+
+  tasks:
+    - name: Create destination directory
+      ansible.builtin.file:
+        path: /tmp/sonarqube-backup-{{ date }}
+        state: directory
+        owner: ansible
+        group: ansible
+        mode: '0777'
+    - name: Create tarball of SonarQube folder
+      command: tar -cvzf /tmp/sonarqube-backup-{{ date }}/sonarqube-{{ date }}.tar.gz -C /opt sonarqube
+
+    - name: Copy config/service files to backup folder
+      copy:
+        src: "{{ item }}"
+        dest: /tmp/sonarqube-backup-{{ date }}
+        owner: ansible
+        group: ansible
+        mode: '0777'
+      with_items:
+        - /etc/systemd/system/sonarqube-{{ old_version }}.service
+        - /opt/sonarqube/sonarqube-{{ old_version }}/conf/sonar.properties

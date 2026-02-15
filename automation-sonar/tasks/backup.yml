@@ -1,0 +1,19 @@
+---
+- name: Copy SonarQube folder to /tmp with date
+  hosts: 127.0.0.1
+  become: yes
+  vars:
+    date: "{{ lookup('pipe', 'date +%Y%m%d') }}"  # Format: YYYYMMDD
+
+  tasks:
+    - name: Copy /opt/sonarqube to /tmp/sonarqube-{{ date }}
+      copy:
+        src: /opt/sonarqube/
+        dest: "/tmp/sonarqube-{{ date }}/"
+        owner: ansible
+        group: ansible
+        mode: '0775'
+        remote_src: yes
+
+
+

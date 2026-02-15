@@ -1,0 +1,35 @@
+---
+- name: Check and start PostgreSQL and SonarQube services
+  hosts: 127.0.0.1
+  become: yes
+  tasks:
+
+    - name: Gather service facts
+      service_facts:
+
+    - name: Show PostgreSQL service status
+      debug:
+        msg: "postgresql.service state is {{ ansible_facts.services['postgresql.service'].state }}"
+      when: "'postgresql.service' in ansible_facts.services"
+
+    - name: Show SonarQube service status
+      debug:
+        msg: "sonarqube.service state is {{ ansible_facts.services['sonarqube.service'].state }}"
+      when: "'sonarqube.service' in ansible_facts.services"
+
+    - name: Start PostgreSQL service if stopped
+      service:
+        name: postgresql.service
+        state: started
+      when:
+        - "'postgresql.service' in ansible_facts.services"
+        - ansible_facts.services['postgresql.service'].state != "running"
+
+    - name: Start SonarQube service if stopped
+      service:
+        name: sonarqube.service
+        state: started
+      when:
+        - "'sonarqube.service' in ansible_facts.services"
+        - ansible_facts.services['sonarqube.service'].state != "running"
+

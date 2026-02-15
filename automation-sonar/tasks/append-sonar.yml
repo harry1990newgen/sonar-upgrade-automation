@@ -1,0 +1,23 @@
+---
+- name: Append JDBC settings from old to new SonarQube
+  hosts: 127.0.0.1
+  become: yes
+  tasks:
+
+    - name: Read JDBC settings from old sonar.properties
+      slurp:
+        src: /opt/sonarqube/sonarqube-2025.6.0/conf/sonar.properties
+      register: old_sonar_properties
+
+    - name: Extract JDBC lines
+      set_fact:
+        jdbc_lines: "{{ old_sonar_properties.content | b64decode | regex_findall('^sonar\\.jdbc\\..*$', multiline=True) }}"
+
+    - name: Append JDBC lines to new sonar.properties
+      lineinfile:
+        path: /opt/sonarqube/sonarqube-2025.6.1/conf/sonar.properties
+        line: "{{ item }}"
+        insertafter: EOF
+        create: yes
+      loop: "{{ jdbc_lines }}"
+

@@ -1,0 +1,20 @@
+---
+- name: Download & extract latest SonarQube
+  hosts: 127.0.0.1
+  become: yes
+  tasks:
+
+    - name: Copy latest SonarQube zip from /tmp to /opt
+      copy:
+          src: "{{ item }}"
+          dest: /opt/
+          owner: ansible
+          group: ansible
+          mode: '0777'
+      with_fileglob:
+          - "/tmp/sonarqube/sonarqube-developer*"
+        
+    # Rename latest SonarQube directory (commented out for now)
+    # - name: Rename latest SonarQube directory
+    #   command: mv /opt/sonarqube/sonarqube-{{ old_version }} /opt/sonarqube/sonarqube-{{ new_version }}
+
