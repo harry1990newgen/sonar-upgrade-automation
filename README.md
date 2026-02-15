@@ -1,5 +1,8 @@
 # sonar-upgrade-automation (Developer Edition)
 Automate sonarqube upgrade process using ansible
+This project automates the SonarQube upgrade process using Ansible.
+It handles service management, backup, extraction, configuration updates, and permission corrections to ensure a smooth upgrade.
+
 
 Directory structure followed as below :
 
