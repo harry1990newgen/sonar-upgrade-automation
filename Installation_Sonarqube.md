@@ -109,7 +109,7 @@ sudo useradd -r -m -U -d /opt/sonarqube -s /bin/bash sonar
 
 ```bash
 cd /opt
-sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.5.1.90531.zip
+sudo wget https://binaries.sonarsource.com/Distribution/sonarqube/sonarqube-10.5.1.90531.zip (https://www.sonarsource.com/products/sonarqube/downloads/)
 sudo unzip sonarqube-10.5.1.90531.zip
 sudo mv sonarqube-10.5.1.90531 sonarqube
 sudo chown -R sonar:sonar /opt/sonarqube
